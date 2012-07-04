@@ -3,13 +3,14 @@
 #
 # @author Soenke Ruempler <soenke@ruempler.eu>
 # @author Sebastian Kaspari <s.kaspari@googlemail.com>
+# @author Nicolas Potier <nicolas.potier@acseo-conseil.fr>
 #
 # see the README
 
-PHPCS_BIN=/usr/bin/phpcs
-PHPCS_CODING_STANDARD=PEAR
-PHPCS_IGNORE=
-TMP_STAGING=".tmp_staging"
+#PHPCS_BIN=phpcs
+#PHPCS_CODING_STANDARD=Symfony2
+#PHPCS_IGNORE=
+#TMP_STAGING=".tmp_staging"
 
 # parse config
 CONFIG_FILE=$(dirname $0)/config
@@ -18,10 +19,10 @@ if [ -e $CONFIG_FILE ]; then
 fi
 
 # simple check if code sniffer is set up correctly
-if [ ! -x $PHPCS_BIN ]; then
-    echo "PHP CodeSniffer bin not found or executable -> $PHPCS_BIN"
-    exit 1
-fi
+#if [ ! -x $PHPCS_BIN ]; then
+#    echo "PHP CodeSniffer bin not found or executable -> $PHPCS_BIN"
+#    exit 1
+#fi
 
 # stolen from template file
 if git rev-parse --verify HEAD
@@ -97,14 +98,31 @@ do
   STAGED_FILES="$STAGED_FILES $TMP_STAGING/$FILE"
 done
 
-OUTPUT=$($PHPCS_BIN -s $IGNORE_WARNINGS  --standard=$PHPCS_CODING_STANDARD $ENCODING $IGNORE $STAGED_FILES)
-RETVAL=$?
+OUTPUT_PHPCS=$($PHPCS_BIN -s $IGNORE_WARNINGS  --standard=$PHPCS_CODING_STANDARD $ENCODING $IGNORE $STAGED_FILES)
+RETVAL_PHPCS=$?
+
+#execute PHPMD
+OUTPUT_PHPMD=$(phpmd $TMP_STAGING text codesize,unusedcode,naming)
+RETVAL_PHPMD=$?
 
 # delete temporary copy of staging area
 rm -rf $TMP_STAGING
 
-if [ $RETVAL -ne 0 ]; then
-    echo "$OUTPUT" | less
+if [ -e $PRECOMMIT_LOG ]; then
+    rm  $PRECOMMIT_LOG
 fi
 
-exit $RETVAL
+if [ $RETVAL_PHPCS -ne 0 ]; then
+    echo "$OUTPUT_PHPCS" 
+    echo "$OUTPUT_PHPCS" >> $PRECOMMIT_LOG
+    echo "PHP Code Sniffer errors have been detected... Report has been written in $PRECOMMIT_LOG file"
+fi
+if [ $RETVAL_PHPMD -ne 0 ]; then
+    echo "$OUTPUT_PHPMD"
+    echo "$OUTPUT_PHPMD" >> $PRECOMMIT_LOG
+    echo "PHP Mess Detector errors have been detected... Report has been written in $PRECOMMIT_LOG file"
+fi
+if [ $BLOCK_ON_ERRORS -ne 0 ]; then
+  exit $RETVAL_PHPCS+$RETVAL_PHPMD
+fi
+exit 0

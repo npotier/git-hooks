@@ -1,9 +1,17 @@
+# Global variables
+
+TMP_STAGING=".tmp_staging"
+PRECOMMIT_LOG=".precommit_log"
+BLOCK_ON_ERRORS=0
+
+
+# PHPCS Configuration
 # path to phpcs "binary"
-PHPCS_BIN=/usr/bin/phpcs
+PHPCS_BIN=phpcs
 
 # the coding standard, you can also specify a path to your own standard here 
 # e. g. /path/to/my/standard/dir/
-PHPCS_CODING_STANDARD=PEAR
+PHPCS_CODING_STANDARD=Symfony2
 
 # comma-separated list of file patterns being ignored
 PHPCS_IGNORE=
@@ -16,3 +24,12 @@ PHPCS_IGNORE_WARNINGS=1
 
 # encoding
 PHPCS_ENCODING=utf-8
+
+
+# PHPMD Configuration
+
+# path to phpmd "binary"
+PHPMD_BIN=phpmd
+
+# applicables rulesets
+PHPMD_RULESETS=
