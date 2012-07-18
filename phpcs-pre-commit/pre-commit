@@ -124,7 +124,7 @@ if [ $RETVAL_PHPMD -ne 0 ]; then
     echo "PHP Mess Detector errors have been detected... Report has been written in $PRECOMMIT_LOG file"
 fi
 if [ $BLOCK_ON_ERRORS -ne 0 ]; then
-    RETURN_CODE=$RETVAL_PHPCS+$RETVAL_PHPMD
+    RETURN_CODE=`expr $RETVAL_PHPCS+$RETVAL_PHPMD`
     echo "The hook has been configured to block on error. returning status code $RETURN_CODE"
     exit $RETURN_CODE
 fi
