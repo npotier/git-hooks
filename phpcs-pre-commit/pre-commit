@@ -14,13 +14,13 @@ if [ -e $CONFIG_FILE ]; then
 fi
 
 # simple check if PHPCS is set up correctly
-if [ ! -x $PHPCS_BIN ]; then
+if [ $ENABLE_PHPCS == 1 && ! -x $PHPCS_BIN ]; then
     echo "PHP CodeSniffer bin not found or executable -> $PHPCS_BIN"
     exit 1
 fi
 
 # simple check if PHPMD is set up correctly
-if [ ! -x $PHPMD_BIN ]; then
+if [ $ENABLE_PHPMD == 1 && ! -x $PHPMD_BIN ]; then
     echo "PHP Mess Detector bin not found or executable -> $PHPCS_BIN"
     exit 1
 fi
@@ -99,13 +99,18 @@ do
   STAGED_FILES="$STAGED_FILES $TMP_STAGING/$FILE"
 done
 
-OUTPUT_PHPCS=$($PHPCS_BIN -s $IGNORE_WARNINGS  --standard=$PHPCS_CODING_STANDARD $ENCODING $IGNORE $STAGED_FILES)
-RETVAL_PHPCS=$?
+RETVAL_PHPCS=0
+if [$ENABLE_PHPCS==1]; then
+    OUTPUT_PHPCS=$($PHPCS_BIN -s $IGNORE_WARNINGS  --standard=$PHPCS_CODING_STANDARD $ENCODING $IGNORE $STAGED_FILES)
+    RETVAL_PHPCS=$?
+fi
 
-#execute PHPMD
-OUTPUT_PHPMD=$(phpmd $TMP_STAGING text codesize,unusedcode,naming)
-RETVAL_PHPMD=$?
-
+RETVAL_PHPMD=0
+if [$ENABLE_PHPMD==1]; then
+    #execute PHPMD
+    OUTPUT_PHPMD=$(phpmd $TMP_STAGING text codesize,unusedcode,naming)
+    RETVAL_PHPMD=$?
+fi
 # delete temporary copy of staging area
 rm -rf $TMP_STAGING
 

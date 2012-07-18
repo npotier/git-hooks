@@ -3,7 +3,8 @@
 TMP_STAGING=".tmp_staging"
 PRECOMMIT_LOG=".precommit_log"
 BLOCK_ON_ERRORS=0
-
+ENABLE_PHPCS=1
+ENABLE_PHPMD=1
 
 # PHPCS Configuration
 # path to phpcs "binary"
