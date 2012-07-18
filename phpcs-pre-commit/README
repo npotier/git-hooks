@@ -25,6 +25,6 @@ FEATURES
 USAGE
 
  1) with curl : 
- 	curl https://raw.github.com/npotier/git-hooks/master/phpcs-pre-commit/pre-commit -o ./git/hooks/pre-commit && https://raw.github.com/npotier/git-hooks/master/phpcs-pre-commit/config -o ./git/hooks/config
+ 	curl https://raw.github.com/npotier/git-hooks/master/phpcs-pre-commit/pre-commit -o ./.git/hooks/pre-commit && https://raw.github.com/npotier/git-hooks/master/phpcs-pre-commit/config -o ./.git/hooks/config
  2) you can configure the hook by editing the config file
 

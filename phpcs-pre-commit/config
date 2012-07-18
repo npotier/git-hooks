@@ -7,7 +7,7 @@ BLOCK_ON_ERRORS=0
 
 # PHPCS Configuration
 # path to phpcs "binary"
-PHPCS_BIN=phpcs
+PHPCS_BIN=/usr/bin/phpcs
 
 # the coding standard, you can also specify a path to your own standard here 
 # e. g. /path/to/my/standard/dir/
@@ -29,7 +29,7 @@ PHPCS_ENCODING=utf-8
 # PHPMD Configuration
 
 # path to phpmd "binary"
-PHPMD_BIN=phpmd
+PHPMD_BIN=/usr/bin/phpmd
 
 # applicables rulesets
 PHPMD_RULESETS=
