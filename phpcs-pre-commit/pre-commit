@@ -7,22 +7,23 @@
 #
 # see the README
 
-#PHPCS_BIN=phpcs
-#PHPCS_CODING_STANDARD=Symfony2
-#PHPCS_IGNORE=
-#TMP_STAGING=".tmp_staging"
-
 # parse config
 CONFIG_FILE=$(dirname $0)/config
 if [ -e $CONFIG_FILE ]; then
     . $CONFIG_FILE
 fi
 
-# simple check if code sniffer is set up correctly
-#if [ ! -x $PHPCS_BIN ]; then
-#    echo "PHP CodeSniffer bin not found or executable -> $PHPCS_BIN"
-#    exit 1
-#fi
+# simple check if PHPCS is set up correctly
+if [ ! -x $PHPCS_BIN ]; then
+    echo "PHP CodeSniffer bin not found or executable -> $PHPCS_BIN"
+    exit 1
+fi
+
+# simple check if PHPMD is set up correctly
+if [ ! -x $PHPMD_BIN ]; then
+    echo "PHP Mess Detector bin not found or executable -> $PHPCS_BIN"
+    exit 1
+fi
 
 # stolen from template file
 if git rev-parse --verify HEAD

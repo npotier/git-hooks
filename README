@@ -1,4 +1,6 @@
 git-hooks collection
+====================
+Currently just a pre-commit hook for PHP Codesniffer and PHP Mess Detector
 
-Currently just a pre-commit hook for PHP Codesniffer
+Based on https://github.com/s0enke/git-hooks
 

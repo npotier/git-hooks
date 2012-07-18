@@ -1,25 +1,30 @@
-PHP Codesniffer Pre-Commit Hook for GIT
+PHP Codesniffer and PHP Mess Detector Pre-Commit Hook for GIT
+=============================================================
+Author : Nicolas Potier <nicolas.potier@acseo-conseil.fr>
 
-Author: Soenke Ruempler <soenke@ruempler.eu>
+
+Based on work made by Soenke Ruempler <soenke@ruempler.eu>
 Website: http://github.com/s0enke/git-hooks
 
 REQUIREMENTS
 
  * Bash
  * PHP CodeSniffer: http://pear.php.net/package/PHP_CodeSniffer/redirected
+ * PHP Mess Detector : http://phpmd.org/
 
 
 FEATURES
 
- * Check Coding style and forbid the commit if violations are found
- * Configuration file for Coding Standard, Path to PHPCS, Ignore List
+ * Configuration file in order to :
+ * * Define if the error will block the commit or not
+ * * log the output in a file
  * Shows output in a 'less' pipe following the smart git principles
+ 
 
 
 USAGE
 
- * Put the script "pre-commit" into your .git/hooks directory 
- * OR: add the script to your pre-commit "chain" (you probably know what to do then)
- * Put the Config file "config" into the same dir as the "pre-commit" script and
-   edit it to your requirements
+ 1) with curl : 
+ 	curl https://raw.github.com/npotier/git-hooks/master/phpcs-pre-commit/pre-commit -o ./git/hooks/pre-commit && https://raw.github.com/npotier/git-hooks/master/phpcs-pre-commit/config -o ./git/hooks/config
+ 2) you can configure the hook by editing the config file
 
