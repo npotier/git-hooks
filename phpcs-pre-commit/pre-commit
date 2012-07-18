@@ -100,13 +100,13 @@ do
 done
 
 RETVAL_PHPCS=0
-if [$ENABLE_PHPCS -ne 0]; then
+if [ $ENABLE_PHPCS -ne 0 ]; then
     OUTPUT_PHPCS=$($PHPCS_BIN -s $IGNORE_WARNINGS  --standard=$PHPCS_CODING_STANDARD $ENCODING $IGNORE $STAGED_FILES)
     RETVAL_PHPCS=$?
 fi
 
 RETVAL_PHPMD=0
-if [$ENABLE_PHPMD -ne 0]; then
+if [ $ENABLE_PHPMD -ne 0 ]; then
     #execute PHPMD
     OUTPUT_PHPMD=$(phpmd $TMP_STAGING text codesize,unusedcode,naming)
     RETVAL_PHPMD=$?
