@@ -1,0 +1,37 @@
+# Global variables
+
+TMP_STAGING=".tmp_staging"
+PRECOMMIT_LOG="{PRECOMMIT_LOG_VALUE}"
+BLOCK_ON_ERRORS={BLOCK_ON_ERRORS_VALUE}
+
+ENABLE_PHPCS={ENABLE_PHPCS_VALUE}
+ENABLE_PHPMD={ENABLE_PHPMD_VALUE}
+
+# PHPCS Configuration
+# path to phpcs "binary"
+PHPCS_BIN={PHPCS_BIN_VALUE}
+
+# the coding standard, you can also specify a path to your own standard here 
+# e. g. /path/to/my/standard/dir/
+PHPCS_CODING_STANDARD={PHPCS_CODING_STANDARD_VALUE}
+
+# comma-separated list of file patterns being ignored
+PHPCS_IGNORE={PHPCS_IGNORE_VALUE}
+
+# egrep compatible pattern of  files to be checked
+PHPCS_FILE_PATTERN="{PHPCS_FILE_PATTERN_VALUE}"
+
+# ignore warnings
+PHPCS_IGNORE_WARNINGS={PHPCS_IGNORE_WARNINGS_VALUE}
+
+# encoding
+PHPCS_ENCODING={PHPCS_ENCODING}
+
+
+# PHPMD Configuration
+
+# path to phpmd "binary"
+PHPMD_BIN={PHPMD_BIN_VALUE}
+
+# applicables rulesets
+PHPMD_RULESETS={PHPMD_RULESETS_VALUE}
