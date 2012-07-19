@@ -1,9 +1,11 @@
 #!/bin/bash
 
 # Récupération des scripts
-curl https://raw.github.com/npotier/git-hooks/master/phpcs-pre-commit/pre-commit -o ./.git/hooks/pre-commit 
-curl https://raw.github.com/npotier/git-hooks/master/phpcs-pre-commit/config-dist -o ./.git/hooks/config 
+wget --no-check-certificate https://raw.github.com/npotier/git-hooks/master/phpcs-pre-commit/pre-commit -O ./.git/hooks/pre-commit 
+wget --no-check-certificate https://raw.github.com/npotier/git-hooks/master/phpcs-pre-commit/config-dist -O ./.git/hooks/config 
 chmod u+x ./.git/hooks/pre-commit 
+
+
 
 # Suppression eventuelle du fichier pre-commit.sample
 if [ -f ./.git/hooks/pre-commit.sample ]
