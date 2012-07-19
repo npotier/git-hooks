@@ -1,4 +1,4 @@
-git-hooks collection
+Git Hooks collection
 ====================
 Currently just a pre-commit hook for PHP Codesniffer and PHP Mess Detector
 
