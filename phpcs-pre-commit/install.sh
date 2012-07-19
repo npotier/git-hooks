@@ -140,5 +140,4 @@ case "$ans" in
 		;;
 esac
 
-echo "\n\n \033[0;32m....D O N E....!\033[0m"
-echo "\n\n \033[0;32m....the pre-commit hook is now installed.\033[0m"
+echo "....D O N E....the pre-commit hook is now installed"
