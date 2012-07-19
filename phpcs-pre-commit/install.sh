@@ -113,38 +113,38 @@ else
 	esac
 fi
 
+if [ $PHPCS_CODESTATUS -e 0 -o PHPMD_CODESTATUS -e 0 ]; then 
+	echo -n "Do you want to log the output pre-commit hook in a file : y/n  (default : yes) ? "
+	read ans
+	case "$ans" in
+		n|no|NO) 
+			sed -i 's/{PRECOMMIT_LOG_VALUE}/0/g' ./.git/hooks/config 
+			;;
+		*) 
+			sed -i 's/{PRECOMMIT_LOG_VALUE}/1/g' ./.git/hooks/config 
+				echo -n "pre-commit hook log filename (default : .pre-commit-log) ? "
+				read ans
+				case "$ans" in			
+				*) 
+					if [ -z $ans ]; then 
+						sed -i 's/{PRECOMMIT_LOG_FILE_VALUE}/.pre-commit-log/g' ./.git/hooks/config
+					else
+						sed -i "s|{PRECOMMIT_LOG_FILE_VALUE}|$ans|g" ./.git/hooks/config
+					fi	
+					;;
+				esac
+			;;
+	esac
 
-echo -n "Do you want to log the output pre-commit hook in a file : y/n  (default : yes) ? "
-read ans
-case "$ans" in
-	n|no|NO) 
-		sed -i 's/{PRECOMMIT_LOG_VALUE}/0/g' ./.git/hooks/config 
-		;;
-	*) 
-		sed -i 's/{PRECOMMIT_LOG_VALUE}/1/g' ./.git/hooks/config 
-			echo -n "pre-commit hook log filename (default : .pre-commit-log) ? "
-			read ans
-			case "$ans" in			
-			*) 
-				if [ -z $ans ]; then 
-					sed -i 's/{PRECOMMIT_LOG_FILE_VALUE}/.pre-commit-log/g' ./.git/hooks/config
-				else
-					sed -i "s|{PRECOMMIT_LOG_FILE_VALUE}|$ans|g" ./.git/hooks/config
-				fi	
-				;;
-			esac
-		;;
-esac
-
-echo -n "Do you want to block commit if errors have been found : y/n (default: yes) ? "
-read ans
-case "$ans" in
-	n|no|NO) 
-		sed -i 's/{BLOCK_ON_ERRORS_VALUE}/0/g' ./.git/hooks/config 
-		;;
-	*) 
-		sed -i 's/{BLOCK_ON_ERRORS_VALUE}/1/g' ./.git/hooks/config 
-		;;
-esac
-
+	echo -n "Do you want to block commit if errors have been found : y/n (default: yes) ? "
+	read ans
+	case "$ans" in
+		n|no|NO) 
+			sed -i 's/{BLOCK_ON_ERRORS_VALUE}/0/g' ./.git/hooks/config 
+			;;
+		*) 
+			sed -i 's/{BLOCK_ON_ERRORS_VALUE}/1/g' ./.git/hooks/config 
+			;;
+	esac
+fi
 echo "....D O N E....the pre-commit hook is now installed"
