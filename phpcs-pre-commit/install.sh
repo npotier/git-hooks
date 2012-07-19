@@ -52,25 +52,24 @@ else
 						;;
 				esac
 			done
-			;;
-	esac
+			echo -n "Do you want to ignore PHP Code Sniffer warnings : y/n  (default : yes) ? "
+			read ans
+			case "$ans" in
+				n|no|NO) 
+					sed -i 's/{PHPCS_IGNORE_WARNINGS_VALUE}/0/g' ./.git/hooks/config 
 
-	echo -n "Do you want to ignore PHP Code Sniffer warnings : y/n  (default : yes) ? "
-	read ans
-	case "$ans" in
-		n|no|NO) 
-			sed -i 's/{PHPCS_IGNORE_WARNINGS_VALUE}/0/g' ./.git/hooks/config 
-
-			;;
-		*) 
-			sed -i 's/{PHPCS_IGNORE_WARNINGS_VALUE}/1/g' ./.git/hooks/config 
-			;;
-	esac
-	echo -n "What is the file encofing system that you use (utf-8, iso-8859-1) ? (default : iso-8859-1) ? "
-	read ans
-	case "$ans" in
-		*) 
-			sed -i 's/{PHPCS_ENCODING}/$ans/g' ./.git/hooks/config 
+					;;
+				*) 
+					sed -i 's/{PHPCS_IGNORE_WARNINGS_VALUE}/1/g' ./.git/hooks/config 
+					;;
+			esac
+			echo -n "What is the file encofing system that you use (utf-8, iso-8859-1) ? (default : iso-8859-1) ? "
+			read ans
+			case "$ans" in
+				*) 
+					sed -i 's|{PHPCS_ENCODING_VALUE}|$ans|g' ./.git/hooks/config 
+					;;
+			esac
 			;;
 	esac
 fi
@@ -95,11 +94,12 @@ else
 			echo -n "Enter a comma separated list of ruleset that you want to use : (default : codesize,design,naming,unusedcode) ? "
 			read ans
 			case "$ans" in
-			"")
-				sed -i 's/{PHPMD_RULESETS_VALUE}/codesize,design,naming,unusedcode/g' ./.git/hooks/config 	
-				;;			
 			*) 
-				sed -i 's/{PHPMD_RULESETS_VALUE}/$ans/g' ./.git/hooks/config 	
+				if [ ${#ans} -e 0 ]; then 
+					sed -i 's/{PHPMD_RULESETS_VALUE}/codesize,design,naming,unusedcode/g' ./.git/hooks/config 	
+				else
+					sed -i 's/{PHPMD_RULESETS_VALUE}/$ans/g' ./.git/hooks/config 		
+				fi				
 				;;
 			esac
 			;;
@@ -117,12 +117,13 @@ case "$ans" in
 		sed -i 's/{PRECOMMIT_LOG_VALUE}/1/g' ./.git/hooks/config 
 			echo -n "pre-commit hook log filename (default : .pre-commit-log) ? "
 			read ans
-			case "$ans" in
-			"")
-				sed -i 's/{PRECOMMIT_LOG_FILE_VALUE}/.pre-commit-log/g' ./.git/hooks/config 	
-				;;			
+			case "$ans" in			
 			*) 
-				sed -i 's/{PRECOMMIT_LOG_FILE_VALUE}/$ans/g' ./.git/hooks/config 	
+				if [ expr length $ans -e 0 ]; then 
+					sed -i 's/{PRECOMMIT_LOG_FILE_VALUE}/.pre-commit-log/g' ./.git/hooks/config
+				else
+					sed -i 's/{PRECOMMIT_LOG_FILE_VALUE}/$ans/g' ./.git/hooks/config
+				fi	
 				;;
 			esac
 		;;
@@ -132,11 +133,10 @@ echo -n "Do you want to block commit if errors have been found : y/n (default: y
 read ans
 case "$ans" in
 	n|no|NO) 
-		sed -i 's/{BLOCK_ON_ERRORS}/0/g' ./.git/hooks/config 
+		sed -i 's/{BLOCK_ON_ERRORS_VALUE}/0/g' ./.git/hooks/config 
 		;;
 	*) 
-		sed -i 's/{BLOCK_ON_ERRORS}/1/g' ./.git/hooks/config 
-			echo -n "pre-commit hook log filename (default : .pre-commit-log) ? "
+		sed -i 's/{BLOCK_ON_ERRORS_VALUE}/1/g' ./.git/hooks/config 
 		;;
 esac
 
