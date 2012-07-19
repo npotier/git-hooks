@@ -67,10 +67,12 @@ else
 			read ans
 			case "$ans" in
 				*) 
-					if [ -z $ans]; then 
+					if [ -z $ans ]; then 
 						sed -i 's/{PHPCS_ENCODING_VALUE}/utf-8/g' ./.git/hooks/config 
+					else
+						echo $ans
+						sed -i "s|{PHPCS_ENCODING_VALUE}|$ans|g" ./.git/hooks/config 
 					fi	
-					sed -i 's|{PHPCS_ENCODING_VALUE}|$ans|g' ./.git/hooks/config 
 					;;
 			esac
 			;;
@@ -98,10 +100,10 @@ else
 			read ans
 			case "$ans" in
 			*) 
-				if [ -z $ans]; then 
+				if [ -z $ans ]; then 
 					sed -i 's/{PHPMD_RULESETS_VALUE}/codesize,design,naming,unusedcode/g' ./.git/hooks/config 	
 				else
-					sed -i 's/{PHPMD_RULESETS_VALUE}/$ans/g' ./.git/hooks/config 		
+					sed -i "s|{PHPMD_RULESETS_VALUE}|$ans|g" ./.git/hooks/config 		
 				fi				
 				;;
 			esac
@@ -122,10 +124,10 @@ case "$ans" in
 			read ans
 			case "$ans" in			
 			*) 
-				if [ -z $ans]; then 
+				if [ -z $ans ]; then 
 					sed -i 's/{PRECOMMIT_LOG_FILE_VALUE}/.pre-commit-log/g' ./.git/hooks/config
 				else
-					sed -i 's/{PRECOMMIT_LOG_FILE_VALUE}/$ans/g' ./.git/hooks/config
+					sed -i "s|{PRECOMMIT_LOG_FILE_VALUE}|$ans|g" ./.git/hooks/config
 				fi	
 				;;
 			esac
