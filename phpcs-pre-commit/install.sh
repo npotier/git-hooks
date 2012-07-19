@@ -5,14 +5,11 @@ wget -nv --no-check-certificate https://raw.github.com/npotier/git-hooks/master/
 wget -nv --no-check-certificate https://raw.github.com/npotier/git-hooks/master/phpcs-pre-commit/config-dist -O ./.git/hooks/config 
 chmod u+x ./.git/hooks/pre-commit 
 
-
-
 # Suppression eventuelle du fichier pre-commit.sample
 if [ -f ./.git/hooks/pre-commit.sample ]
 then
     rm ./.git/hooks/pre-commit.sample
 fi 
-
 
 # Configuration interactive de l'outil
 #clear;
