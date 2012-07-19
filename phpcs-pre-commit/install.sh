@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 # Récupération des scripts
 curl https://raw.github.com/npotier/git-hooks/master/phpcs-pre-commit/pre-commit -o ./.git/hooks/pre-commit 
 curl https://raw.github.com/npotier/git-hooks/master/phpcs-pre-commit/config-dist -o ./.git/hooks/config 
