@@ -63,10 +63,13 @@ else
 					sed -i 's/{PHPCS_IGNORE_WARNINGS_VALUE}/1/g' ./.git/hooks/config 
 					;;
 			esac
-			echo -n "What is the file encofing system that you use (utf-8, iso-8859-1) ? (default : iso-8859-1) ? "
+			echo -n "What is the file encofing system that you use (utf-8, iso-8859-1) ? (default : utf-8) ? "
 			read ans
 			case "$ans" in
 				*) 
+					if [ -z $ans]; then 
+						sed -i 's/{PHPCS_ENCODING_VALUE}/utf-8/g' ./.git/hooks/config 
+					fi	
 					sed -i 's|{PHPCS_ENCODING_VALUE}|$ans|g' ./.git/hooks/config 
 					;;
 			esac
@@ -95,7 +98,7 @@ else
 			read ans
 			case "$ans" in
 			*) 
-				if [ ${#ans} -e 0 ]; then 
+				if [ -z $ans]; then 
 					sed -i 's/{PHPMD_RULESETS_VALUE}/codesize,design,naming,unusedcode/g' ./.git/hooks/config 	
 				else
 					sed -i 's/{PHPMD_RULESETS_VALUE}/$ans/g' ./.git/hooks/config 		
@@ -119,7 +122,7 @@ case "$ans" in
 			read ans
 			case "$ans" in			
 			*) 
-				if [ expr length $ans -e 0 ]; then 
+				if [ -z $ans]; then 
 					sed -i 's/{PRECOMMIT_LOG_FILE_VALUE}/.pre-commit-log/g' ./.git/hooks/config
 				else
 					sed -i 's/{PRECOMMIT_LOG_FILE_VALUE}/$ans/g' ./.git/hooks/config
