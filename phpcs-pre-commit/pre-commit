@@ -120,13 +120,18 @@ fi
 
 if [ $RETVAL_PHPCS -ne 0 ]; then
     echo "$OUTPUT_PHPCS" 
-    echo "$OUTPUT_PHPCS" >> $PRECOMMIT_LOG
-    echo "PHP Code Sniffer errors have been detected... Report has been written in $PRECOMMIT_LOG file"
+
+    if [ $PRECOMMIT_LOG -ne 0 ]; then
+        echo "$OUTPUT_PHPCS" >> $PRECOMMIT_LOG
+        echo "PHP Code Sniffer errors have been detected... Report has been written in $PRECOMMIT_LOG_FILE file"
+    fi
 fi
 if [ $RETVAL_PHPMD -ne 0 ]; then
     echo "$OUTPUT_PHPMD"
-    echo "$OUTPUT_PHPMD" >> $PRECOMMIT_LOG
-    echo "PHP Mess Detector errors have been detected... Report has been written in $PRECOMMIT_LOG file"
+    if [ $PRECOMMIT_LOG -ne 0 ]; then
+        echo "$OUTPUT_PHPMD" >> $PRECOMMIT_LOG
+        echo "PHP Mess Detector errors have been detected... Report has been written in $PRECOMMIT_LOG_FILE file"
+    fi    
 fi
 if [ $BLOCK_ON_ERRORS -ne 0 ]; then
     RETURN_CODE=`expr $RETVAL_PHPCS+$RETVAL_PHPMD`
