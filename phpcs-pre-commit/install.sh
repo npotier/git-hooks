@@ -113,7 +113,6 @@ else
 	esac
 fi
 
-if [ $PHPCS_CODESTATUS -e 0 -o PHPMD_CODESTATUS -e 0 ]; then 
 	echo -n "Do you want to log the output pre-commit hook in a file : y/n  (default : yes) ? "
 	read ans
 	case "$ans" in
@@ -146,5 +145,4 @@ if [ $PHPCS_CODESTATUS -e 0 -o PHPMD_CODESTATUS -e 0 ]; then
 			sed -i 's/{BLOCK_ON_ERRORS_VALUE}/1/g' ./.git/hooks/config 
 			;;
 	esac
-fi
 echo "....D O N E....the pre-commit hook is now installed"
