@@ -22,7 +22,7 @@ Website: http://github.com/s0enke/git-hooks
 
 # INSTALLATION
 
-You can use the setup script install.sh with curl : 
+You can use the setup script install.sh with wget : 
 ```bash
-wget --no-check-certificate https://raw.github.com/npotier/git-hooks/master/phpcs-pre-commit/install.sh -O ./install.sh && chmod +x ./install.sh && ./install.sh
+wget -nv --no-check-certificate https://raw.github.com/npotier/git-hooks/master/phpcs-pre-commit/install.sh -O ./install.sh && chmod +x ./install.sh && ./install.sh
 ```
