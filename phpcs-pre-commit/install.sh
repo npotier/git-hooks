@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Récupération des scripts
-wget --no-check-certificate https://raw.github.com/npotier/git-hooks/master/phpcs-pre-commit/pre-commit -O ./.git/hooks/pre-commit 
-wget --no-check-certificate https://raw.github.com/npotier/git-hooks/master/phpcs-pre-commit/config-dist -O ./.git/hooks/config 
+wget -nv --no-check-certificate https://raw.github.com/npotier/git-hooks/master/phpcs-pre-commit/pre-commit -O ./.git/hooks/pre-commit 
+wget -nv --no-check-certificate https://raw.github.com/npotier/git-hooks/master/phpcs-pre-commit/config-dist -O ./.git/hooks/config 
 chmod u+x ./.git/hooks/pre-commit 
 
 
@@ -15,6 +15,7 @@ fi
 
 
 # Configuration interactive de l'outil
+#clear;
 echo "Welcome to PHPCS / PHPMD pre commit hook for Git projects"
 
 PHPCS_BIN=$(which phpcs)
