@@ -46,4 +46,4 @@ do
   STAGED_FILES="$STAGED_FILES $TMP_STAGING/$FILE"
 done
 
-phpmd $TMP_STAGING text codesize,unusedcode,naming
+/tmp/phpmd $TMP_STAGING text codesize,unusedcode,naming
